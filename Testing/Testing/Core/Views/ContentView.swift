@@ -11,10 +11,17 @@ import SwiftData
 struct ContentView: View {
     
     var viewModel: ViewModel = .init()
-
+    
+    @State private var showCreateNote: Bool = false
+    
     var body: some View {
         NavigationStack {
             listOfNotes
+                .toolbar {
+                    ToolbarItem(placement: .status) {
+                        createNoteButton
+                    }
+                }
         }
     }
 }
@@ -39,5 +46,17 @@ extension ContentView {
                 }
             }
         }
+    }
+    
+    private var createNoteButton: some View {
+        Button(action: {
+            showCreateNote.toggle()
+        }, label: {
+            Label("Create Note", systemImage: "square.and.pencil")
+                .labelStyle(TitleAndIconLabelStyle())
+        })
+        .buttonStyle(.bordered)
+        .tint(.blue)
+        .bold()
     }
 }

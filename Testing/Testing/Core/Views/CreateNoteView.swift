@@ -21,11 +21,11 @@ struct CreateNoteView: View {
             createNoteForm
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        xMarkDismissButton
+                        xDismissButton
                     }
                     
                     ToolbarItem {
-                        createNoteButton
+                        saveNoteButton
                     }
                 }
                 .navigationTitle("New note")
@@ -51,7 +51,7 @@ extension CreateNoteView {
         }
     }
     
-    private var xMarkDismissButton: some View {
+    private var xDismissButton: some View {
         Button {
             dismiss()
         } label: {
@@ -59,12 +59,11 @@ extension CreateNoteView {
         }
     }
     
-    private var createNoteButton: some View {
+    private var saveNoteButton: some View {
         Button {
             viewModel.createNoteWith(title: title, text: text)
         } label: {
-            Text("Create Note")
-                .bold()
+            Image(systemName: "checkmark.circle")
         }
     }
 }

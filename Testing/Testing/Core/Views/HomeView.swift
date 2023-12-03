@@ -22,6 +22,13 @@ struct HomeView: View {
                         createNoteButton
                     }
                 }
+                .navigationTitle("Notes")
+                .navigationDestination(for: Note.self, destination: { note in
+                    UpdateNoteView(viewModel: viewModel, id: note.id, title: note.title, text: note.getText)
+                })
+                .fullScreenCover(isPresented: $showCreateNote, content: {
+                    CreateNoteView(viewModel: viewModel)
+                })
         }
     }
 }
@@ -38,11 +45,13 @@ extension HomeView {
     private var listOfNotes: some View {
         List {
             ForEach(viewModel.notes) { note in
-                VStack(alignment: .leading) {
-                    Text(note.title)
-                        .foregroundStyle(.primary)
-                    Text(note.getText)
-                        .foregroundStyle(.secondary)
+                NavigationLink(value: note) {
+                    VStack(alignment: .leading) {
+                        Text(note.title)
+                            .foregroundStyle(.primary)
+                        Text(note.getText)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }

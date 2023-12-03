@@ -14,6 +14,7 @@
 		3409D2BA2B1CCBC00066A373 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2B92B1CCBC00066A373 /* Note.swift */; };
 		3409D2BD2B1CCCA80066A373 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2BC2B1CCCA80066A373 /* ViewModel.swift */; };
 		3409D2C02B1CD16F0066A373 /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2BF2B1CD16F0066A373 /* CreateNoteView.swift */; };
+		3409D2C42B1CD9B00066A373 /* UpdateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2C32B1CD9B00066A373 /* UpdateNoteView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		3409D2B92B1CCBC00066A373 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		3409D2BC2B1CCCA80066A373 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		3409D2BF2B1CD16F0066A373 /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
+		3409D2C32B1CD9B00066A373 /* UpdateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				3409D2AB2B1CCB260066A373 /* HomeView.swift */,
 				3409D2BF2B1CD16F0066A373 /* CreateNoteView.swift */,
+				3409D2C32B1CD9B00066A373 /* UpdateNoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				3409D2BD2B1CCCA80066A373 /* ViewModel.swift in Sources */,
 				3409D2AC2B1CCB260066A373 /* HomeView.swift in Sources */,
 				3409D2AA2B1CCB260066A373 /* TestingApp.swift in Sources */,
+				3409D2C42B1CD9B00066A373 /* UpdateNoteView.swift in Sources */,
 				3409D2C02B1CD16F0066A373 /* CreateNoteView.swift in Sources */,
 				3409D2BA2B1CCBC00066A373 /* Note.swift in Sources */,
 			);

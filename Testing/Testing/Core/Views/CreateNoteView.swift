@@ -21,7 +21,7 @@ struct CreateNoteView: View {
             createNoteForm
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
-                        xDismissButton
+                        xDismissViewButton
                     }
                     
                     ToolbarItem {
@@ -44,14 +44,16 @@ extension CreateNoteView {
         Form {
             Section {
                 TextField("", text: $title, prompt: Text("*Title"), axis: .vertical)
+                    .autocorrectionDisabled()
                 TextField("", text: $text, prompt: Text("Text"), axis: .vertical)
+                    .autocorrectionDisabled()
             } footer: {
                 Text("*Title is compulsory")
             }
         }
     }
     
-    private var xDismissButton: some View {
+    private var xDismissViewButton: some View {
         Button {
             dismiss()
         } label: {
@@ -62,6 +64,7 @@ extension CreateNoteView {
     private var saveNoteButton: some View {
         Button {
             viewModel.createNoteWith(title: title, text: text)
+            dismiss()
         } label: {
             Image(systemName: "checkmark.circle")
         }

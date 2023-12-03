@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct HomeView: View {
     
     var viewModel: ViewModel = .init()
     
@@ -27,13 +27,13 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(viewModel: .init(notes: [
+    HomeView(viewModel: .init(notes: [
         .init(title: "Note 1", text: "Text 1", createdAt: .now),
         .init(title: "Note 2", text: "Text 2", createdAt: .now),
     ]))
 }
 
-extension ContentView {
+extension HomeView {
     
     private var listOfNotes: some View {
         List {

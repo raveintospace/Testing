@@ -10,7 +10,7 @@ import XCTest
 
 final class NoteTests: XCTestCase {
 
-    func test_Note_Initialization_shouldBeEqualToPropertiesValues() {
+    func test_noteInit_shouldAssignEqualPropertiesThanGivenValues() {
         // Given
         let title = "Test title"
         let text = "Test text"
@@ -22,6 +22,20 @@ final class NoteTests: XCTestCase {
         // Then
         XCTAssertEqual(note.title, title)
         XCTAssertEqual(note.text, text)
+        XCTAssertEqual(note.createdAt, date)
+    }
+    
+    func test_noteGetText_shouldReturnEmptyStringIfTextIsNil() {
+        // Given
+        let title = "Test title"
+        let date = Date()
+        
+        // When
+        let note = Note(title: title, text: nil, createdAt: date)
+        
+        // Then
+        XCTAssertEqual(note.title, title)
+        XCTAssertEqual(note.getText, "")
         XCTAssertEqual(note.createdAt, date)
     }
 }

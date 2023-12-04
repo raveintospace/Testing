@@ -10,7 +10,7 @@ import XCTest
 
 final class NoteTests: XCTestCase {
 
-    func test_Note_Initialization() {
+    func test_Note_Initialization_shouldBeEqualToPropertiesValues() {
         // Given
         let title = "Test title"
         let text = "Test text"

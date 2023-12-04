@@ -1,6 +1,6 @@
 //
-//  NoteTests.swift
-//  NoteTests
+//  Note_Tests.swift
+//  Note_Tests
 //
 //  Created by Uri on 4/12/23.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Testing
 
-final class NoteTests: XCTestCase {
+final class Note_Tests: XCTestCase {
 
     func test_noteInit_shouldAssignEqualPropertiesThanGivenValues() {
         // Given

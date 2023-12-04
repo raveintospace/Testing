@@ -18,7 +18,7 @@ final class ViewModel_Tests: XCTestCase {
     override func tearDownWithError() throws {
     }
 
-    func test_ViewModel_createNote_appendsNewNoteWithEqualValues() {
+    func test_ViewModel_createNoteWith_appendsNewNoteWithEqualValues() {
         // Given
         let title = "Test title"
         let text = "Test text"
@@ -32,7 +32,7 @@ final class ViewModel_Tests: XCTestCase {
         XCTAssertEqual(viewModel.notes.first?.text, text)
     }
     
-    func test_ViewModel_createNote_appendsThreeNewNotesWithEqualValues() {
+    func test_ViewModel_createNoteWith_appendsThreeNewNotesWithEqualValues() {
         // Given
         let title = "Test title"
         let text = "Test text"
@@ -57,6 +57,46 @@ final class ViewModel_Tests: XCTestCase {
         XCTAssertEqual(viewModel.notes[1].text, text2)
         XCTAssertEqual(viewModel.notes[2].title, title3)
         XCTAssertEqual(viewModel.notes[2].text, text3)
+    }
+    
+    func test_ViewModel_updateNoteWith_updatesNoteValues() {
+        // Given
+        let title = "Test title"
+        let text = "Test text"
+        viewModel.createNoteWith(title: title, text: text)
+        
+        let newTitle = "New title"
+        let newText = "New text"
+        
+        if let id = viewModel.notes.first?.id {
+            
+        // When
+            viewModel.updateNoteWith(id: id, newTitle: newTitle, newText: newText)
+            
+        // Then
+            XCTAssertEqual(viewModel.notes.first?.title, newTitle)
+            XCTAssertEqual(viewModel.notes.first?.text, newText)
+        } else {
+            XCTFail("No note to update")
+        }
+    }
+    
+    func test_ViewModel_removeNoteWith_removesNote() {
+        // Given
+        let title = "Test title"
+        let text = "Test text"
+        viewModel.createNoteWith(title: title, text: text)
+        
+        if let id = viewModel.notes.first?.id {
+            
+        // When
+            viewModel.removeNoteWith(id: id)
+        
+        // Then
+            XCTAssertTrue(viewModel.notes.isEmpty)
+        } else {
+            XCTFail("No note to remove")
+        }
     }
 
 }

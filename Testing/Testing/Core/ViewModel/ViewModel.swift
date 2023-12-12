@@ -19,9 +19,12 @@ class ViewModel {
     init(notes: [Note] = [],
          createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
          fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase()) {
+        
         self.notes = notes
         self.createNoteUseCase = createNoteUseCase
         self.fetchAllNotesUseCase = fetchAllNotesUseCase
+        
+        fetchAllNotes()
     }
     
     func createNoteWith(title: String, text: String) {

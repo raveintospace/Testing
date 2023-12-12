@@ -18,6 +18,8 @@
 		346EB78E2B1E3E6500590F0E /* Note_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EB78D2B1E3E6500590F0E /* Note_Tests.swift */; };
 		346EB7952B1E44F500590F0E /* ViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EB7942B1E44F500590F0E /* ViewModel_Tests.swift */; };
 		34D4426D2B28CFA00066BE1C /* NotesDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D4426C2B28CFA00066BE1C /* NotesDatabase.swift */; };
+		34D442702B28D4CC0066BE1C /* CreateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D4426F2B28D4CC0066BE1C /* CreateNoteUseCase.swift */; };
+		34D442722B28D5A10066BE1C /* FetchAllNotesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D442712B28D5A10066BE1C /* FetchAllNotesUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		346EB78D2B1E3E6500590F0E /* Note_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_Tests.swift; sourceTree = "<group>"; };
 		346EB7942B1E44F500590F0E /* ViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Tests.swift; sourceTree = "<group>"; };
 		34D4426C2B28CFA00066BE1C /* NotesDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesDatabase.swift; sourceTree = "<group>"; };
+		34D4426F2B28D4CC0066BE1C /* CreateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteUseCase.swift; sourceTree = "<group>"; };
+		34D442712B28D5A10066BE1C /* FetchAllNotesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAllNotesUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				34D4426B2B28CF8D0066BE1C /* Database */,
+				34D4426E2B28D4B70066BE1C /* UseCases */,
 				3409D2BB2B1CCC8B0066A373 /* Model */,
 				3409D2BE2B1CCE840066A373 /* ViewModel */,
 				3409D2C12B1CD1810066A373 /* Views */,
@@ -153,6 +158,15 @@
 				34D4426C2B28CFA00066BE1C /* NotesDatabase.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		34D4426E2B28D4B70066BE1C /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				34D4426F2B28D4CC0066BE1C /* CreateNoteUseCase.swift */,
+				34D442712B28D5A10066BE1C /* FetchAllNotesUseCase.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +274,8 @@
 				3409D2AC2B1CCB260066A373 /* HomeView.swift in Sources */,
 				3409D2AA2B1CCB260066A373 /* TestingApp.swift in Sources */,
 				3409D2C42B1CD9B00066A373 /* UpdateNoteView.swift in Sources */,
+				34D442702B28D4CC0066BE1C /* CreateNoteUseCase.swift in Sources */,
+				34D442722B28D5A10066BE1C /* FetchAllNotesUseCase.swift in Sources */,
 				3409D2C02B1CD16F0066A373 /* CreateNoteView.swift in Sources */,
 				3409D2BA2B1CCBC00066A373 /* Note.swift in Sources */,
 			);

@@ -12,13 +12,33 @@ import Observation
 class ViewModel {
     var notes: [Note]
     
-    init(notes: [Note] = []) {
+    // dependency injection
+    var createNoteUseCase: CreateNoteUseCase
+    var fetchAllNotesUseCase: FetchAllNotesUseCase
+    
+    init(notes: [Note] = [],
+         createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
+         fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase()) {
         self.notes = notes
+        self.createNoteUseCase = createNoteUseCase
+        self.fetchAllNotesUseCase = fetchAllNotesUseCase
     }
     
     func createNoteWith(title: String, text: String) {
-        let note: Note = .init(title: title, text: text, createdAt: .now)
-        notes.append(note)
+        do {
+            try createNoteUseCase.createNoteWith(title: title, text: text)
+            fetchAllNotes()
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchAllNotes() {
+        do {
+            notes = try fetchAllNotesUseCase.fetchAll()
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
+        }
     }
     
     func updateNoteWith(identifier: UUID, newTitle: String, newText: String?) {

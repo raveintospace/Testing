@@ -1,7 +1,7 @@
 //
 //  NotesDatabase.swift
 //  Testing
-//
+//  SwiftData configuration
 //  Created by Uri on 12/12/23.
 //
 

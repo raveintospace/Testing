@@ -21,14 +21,14 @@ class ViewModel {
         notes.append(note)
     }
     
-    func updateNoteWith(id: UUID, newTitle: String, newText: String?) {
-        if let index = notes.firstIndex(where: { $0.id == id }) {
-            let updatedNote = Note(id: id, title: newTitle, text: newText, createdAt: notes[index].createdAt)
+    func updateNoteWith(identifier: UUID, newTitle: String, newText: String?) {
+        if let index = notes.firstIndex(where: { $0.identifier == identifier }) {
+            let updatedNote = Note(identifier: identifier, title: newTitle, text: newText, createdAt: notes[index].createdAt)
             notes[index] = updatedNote
         }
     }
     
-    func removeNoteWith(id: UUID) {
-        notes.removeAll(where: { $0.id == id })
+    func removeNoteWith(identifier: UUID) {
+        notes.removeAll(where: { $0.identifier == identifier })
     }
 }

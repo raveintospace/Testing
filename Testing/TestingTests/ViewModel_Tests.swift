@@ -68,10 +68,10 @@ final class ViewModel_Tests: XCTestCase {
         let newTitle = "New title"
         let newText = "New text"
         
-        if let id = viewModel.notes.first?.id {
+        if let identifier = viewModel.notes.first?.identifier {
             
         // When
-            viewModel.updateNoteWith(id: id, newTitle: newTitle, newText: newText)
+            viewModel.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
             
         // Then
             XCTAssertEqual(viewModel.notes.first?.title, newTitle)
@@ -87,10 +87,10 @@ final class ViewModel_Tests: XCTestCase {
         let text = "Test text"
         viewModel.createNoteWith(title: title, text: text)
         
-        if let id = viewModel.notes.first?.id {
+        if let identifier = viewModel.notes.first?.identifier {
             
         // When
-            viewModel.removeNoteWith(id: id)
+            viewModel.removeNoteWith(identifier: identifier)
         
         // Then
             XCTAssertTrue(viewModel.notes.isEmpty)

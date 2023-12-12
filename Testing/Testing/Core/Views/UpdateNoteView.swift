@@ -10,7 +10,7 @@ import SwiftUI
 struct UpdateNoteView: View {
     var viewModel: ViewModel
     
-    let id: UUID
+    let identifier: UUID
     
     @State var title: String = ""
     @State var text: String = ""
@@ -35,7 +35,7 @@ struct UpdateNoteView: View {
 
 #Preview {
     NavigationStack {
-        UpdateNoteView(viewModel: .init(), id: .init(), title: "Dummy title", text: "Dummy text to see the textfield with several characters")
+        UpdateNoteView(viewModel: .init(), identifier: .init(), title: "Dummy title", text: "Dummy text to see the textfield with several characters")
     }
 }
 
@@ -54,7 +54,7 @@ extension UpdateNoteView {
     
     private var saveNoteButton: some View {
         Button {
-            viewModel.updateNoteWith(id: id, newTitle: title, newText: text)
+            viewModel.updateNoteWith(identifier: identifier, newTitle: title, newText: text)
             dismiss()
         } label: {
             Image(systemName: "checkmark.circle")
@@ -63,7 +63,7 @@ extension UpdateNoteView {
     
     private var removeNoteButton: some View {
         Button(action: {
-            viewModel.removeNoteWith(id: id)
+            viewModel.removeNoteWith(identifier: identifier)
             dismiss()
         }, label: {
             Image(systemName: "trash.circle")

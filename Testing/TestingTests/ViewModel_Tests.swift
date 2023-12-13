@@ -9,7 +9,7 @@ import XCTest
 @testable import Testing
 
 final class ViewModel_Tests: XCTestCase {
-    var viewModel: ViewModel!
+    var sut: ViewModel!
 
     override func setUpWithError() throws {
         viewModel = ViewModel()

@@ -12,7 +12,7 @@ final class ViewModel_Tests: XCTestCase {
     var sut: ViewModel!
 
     override func setUpWithError() throws {
-        viewModel = ViewModel()
+        sut = ViewModel()
     }
 
     override func tearDownWithError() throws {
@@ -24,12 +24,12 @@ final class ViewModel_Tests: XCTestCase {
         let text = "Test text"
         
         // When
-        viewModel.createNoteWith(title: title, text: text)
+        sut.createNoteWith(title: title, text: text)
         
         // Then
-        XCTAssertEqual(viewModel.notes.count, 1)
-        XCTAssertEqual(viewModel.notes.first?.title, title)
-        XCTAssertEqual(viewModel.notes.first?.text, text)
+        XCTAssertEqual(sut.notes.count, 1)
+        XCTAssertEqual(sut.notes.first?.title, title)
+        XCTAssertEqual(sut.notes.first?.text, text)
     }
     
     func test_ViewModel_createNoteWith_appendsThreeNewNotesWithEqualValues() {
@@ -44,38 +44,38 @@ final class ViewModel_Tests: XCTestCase {
         let text3 = "Test text 3"
         
         // When
-        viewModel.createNoteWith(title: title, text: text)
-        viewModel.createNoteWith(title: title2, text: text2)
-        viewModel.createNoteWith(title: title3, text: text3)
+        sut.createNoteWith(title: title, text: text)
+        sut.createNoteWith(title: title2, text: text2)
+        sut.createNoteWith(title: title3, text: text3)
         
         
         // Then
-        XCTAssertEqual(viewModel.notes.count, 3)
-        XCTAssertEqual(viewModel.notes.first?.title, title)
-        XCTAssertEqual(viewModel.notes.first?.text, text)
-        XCTAssertEqual(viewModel.notes[1].title, title2)
-        XCTAssertEqual(viewModel.notes[1].text, text2)
-        XCTAssertEqual(viewModel.notes[2].title, title3)
-        XCTAssertEqual(viewModel.notes[2].text, text3)
+        XCTAssertEqual(sut.notes.count, 3)
+        XCTAssertEqual(sut.notes.first?.title, title)
+        XCTAssertEqual(sut.notes.first?.text, text)
+        XCTAssertEqual(sut.notes[1].title, title2)
+        XCTAssertEqual(sut.notes[1].text, text2)
+        XCTAssertEqual(sut.notes[2].title, title3)
+        XCTAssertEqual(sut.notes[2].text, text3)
     }
     
     func test_ViewModel_updateNoteWith_updatesNoteValues() {
         // Given
         let title = "Test title"
         let text = "Test text"
-        viewModel.createNoteWith(title: title, text: text)
+        sut.createNoteWith(title: title, text: text)
         
         let newTitle = "New title"
         let newText = "New text"
         
-        if let identifier = viewModel.notes.first?.identifier {
+        if let identifier = sut.notes.first?.identifier {
             
         // When
-            viewModel.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
+            sut.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
             
         // Then
-            XCTAssertEqual(viewModel.notes.first?.title, newTitle)
-            XCTAssertEqual(viewModel.notes.first?.text, newText)
+            XCTAssertEqual(sut.notes.first?.title, newTitle)
+            XCTAssertEqual(sut.notes.first?.text, newText)
         } else {
             XCTFail("No note to update")
         }
@@ -85,15 +85,15 @@ final class ViewModel_Tests: XCTestCase {
         // Given
         let title = "Test title"
         let text = "Test text"
-        viewModel.createNoteWith(title: title, text: text)
+        sut.createNoteWith(title: title, text: text)
         
-        if let identifier = viewModel.notes.first?.identifier {
+        if let identifier = sut.notes.first?.identifier {
             
         // When
-            viewModel.removeNoteWith(identifier: identifier)
+            sut.removeNoteWith(identifier: identifier)
         
         // Then
-            XCTAssertTrue(viewModel.notes.isEmpty)
+            XCTAssertTrue(sut.notes.isEmpty)
         } else {
             XCTFail("No note to remove")
         }

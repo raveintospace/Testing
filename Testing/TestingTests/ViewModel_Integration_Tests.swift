@@ -27,6 +27,19 @@ final class ViewModel_Integration_Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    
+    // test if VM calls UseCase and it calls Database to insert a new note
+    func test_createNote() {
+        // Given
+        sut.createNoteWith(title: "Hello 1", text: "text 1")
+        
+        // When
+        let note = sut.notes.first
+        
+        // Then
+        XCTAssertNotNil(note)
+        XCTAssertEqual(note?.title, "Hello 1")
+        XCTAssertEqual(note?.text, "text 1")
+        XCTAssertEqual(sut.notes.count, 1, "There should be one note in database")
+    }
 
 }

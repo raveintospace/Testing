@@ -18,7 +18,7 @@ enum DatabaseError: Error {
 protocol NotesDatabaseProtocol {
     func insert(note: Note) throws
     func fetchAll() throws -> [Note]
-    
+    func remove(note: Note) throws
 }
 
 class NotesDatabase: NotesDatabaseProtocol {
@@ -67,6 +67,31 @@ class NotesDatabase: NotesDatabaseProtocol {
         } catch {
             debugPrint("Error \(error.localizedDescription)")
             throw DatabaseError.errorFetch
+        }
+    }
+    
+    // update stored note - https://www.delasign.com/blog/xcode-swiftdata-update/
+    @MainActor
+    func update() throws {
+        
+        do {
+            try container.mainContext.save()
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
+            throw DatabaseError.errorUpdate
+        }
+    }
+    
+    // remove stored note
+    @MainActor
+    func remove(note: Note) throws {
+        container.mainContext.delete(note)
+        
+        do {
+            try container.mainContext.save()
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
+            throw DatabaseError.errorRemove
         }
     }
 }

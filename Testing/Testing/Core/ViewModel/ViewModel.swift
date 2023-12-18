@@ -15,14 +15,17 @@ class ViewModel {
     // dependency injection
     var createNoteUseCase: CreateNoteUseCase
     var fetchAllNotesUseCase: FetchAllNotesUseCase
+    var removeNoteUseCase: RemoveNoteUseCase
     
     init(notes: [Note] = [],
          createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
-         fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase()) {
+         fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase(),
+         removeNoteUseCase: RemoveNoteUseCase = RemoveNoteUseCase()) {
         
         self.notes = notes
         self.createNoteUseCase = createNoteUseCase
         self.fetchAllNotesUseCase = fetchAllNotesUseCase
+        self.removeNoteUseCase = removeNoteUseCase
         
         fetchAllNotes()
     }
@@ -52,6 +55,16 @@ class ViewModel {
     }
     
     func removeNoteWith(identifier: UUID) {
-        notes.removeAll(where: { $0.identifier == identifier })
+        //notes.removeAll(where: { $0.identifier == identifier })
+        
+        if let index = notes.firstIndex(where: { $0.identifier == identifier }) {
+            let noteToRemove = Note(identifier: identifier, title: notes[index].title, text: notes[index].text, createdAt: notes[index].createdAt)
+            do {
+                try removeNoteUseCase.removeNote(note: noteToRemove)
+                fetchAllNotes()
+            } catch {
+                debugPrint("Error \(error.localizedDescription)")
+            }
+        }
     }
 }

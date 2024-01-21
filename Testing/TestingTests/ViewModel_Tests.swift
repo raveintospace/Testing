@@ -8,28 +8,13 @@
 import XCTest
 @testable import Testing
 
-// simulates database storage
-var mockDatabase: [Note] = []
-
-struct createNoteUseCaseMock: CreateNoteProtocol {
-    func createNoteWith(title: String, text: String) throws {
-        let note = Note(title: title, text: text, createdAt: .now)
-        mockDatabase.append(note)
-    }
-}
-
-struct fetchAllNotesUseCaseMock: FetchAllNotesProtocol {
-    func fetchAll() throws -> [Testing.Note] {
-        return mockDatabase
-    }
-}
-
 final class ViewModel_Tests: XCTestCase {
     var sut: ViewModel!
 
     override func setUpWithError() throws {
         sut = ViewModel(createNoteUseCase: createNoteUseCaseMock(),
-        fetchAllNotesUseCase: fetchAllNotesUseCaseMock())
+                        fetchAllNotesUseCase: fetchAllNotesUseCaseMock(),
+                        updateNoteUseCase: updateNoteUseCaseMock())
     }
 
     override func tearDownWithError() throws {
@@ -78,27 +63,26 @@ final class ViewModel_Tests: XCTestCase {
         XCTAssertEqual(sut.notes[2].text, text3)
     }
     
-//    func test_ViewModel_updateNoteWith_updatesNoteValues() {
-//        // Given
-//        let title = "Test title"
-//        let text = "Test text"
-//        sut.createNoteWith(title: title, text: text)
-//        
-//        let newTitle = "New title"
-//        let newText = "New text"
-//        
-//        if let identifier = sut.notes.first?.identifier {
-//            
-//        // When
-//            sut.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
-//            
-//        // Then
-//            XCTAssertEqual(sut.notes.first?.title, newTitle)
-//            XCTAssertEqual(sut.notes.first?.text, newText)
-//        } else {
-//            XCTFail("No note to update")
-//        }
-//    }
+    func test_ViewModel_updateNoteWith_updatesNoteValues() {
+        // Given
+        let title = "Test title"
+        let text = "Test text"
+        sut.createNoteWith(title: title, text: text)
+        
+        let newTitle = "New title"
+        let newText = "New text"
+            
+        // When
+        if let identifier = sut.notes.first?.identifier {
+            sut.updateNoteWith(identifier: identifier, newTitle: newTitle, newText: newText)
+            
+        // Then
+            XCTAssertEqual(sut.notes.first?.title, newTitle)
+            XCTAssertEqual(sut.notes.first?.text, newText)
+        } else {
+            XCTFail("No note to update")
+        }
+    }
 //    
 //    func test_ViewModel_removeNoteWith_removesNote() {
 //        // Given

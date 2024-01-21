@@ -16,6 +16,7 @@
 		3409D2C02B1CD16F0066A373 /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2BF2B1CD16F0066A373 /* CreateNoteView.swift */; };
 		3409D2C42B1CD9B00066A373 /* UpdateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3409D2C32B1CD9B00066A373 /* UpdateNoteView.swift */; };
 		340F73772B5D687C004AFACC /* UpdateNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340F73762B5D687C004AFACC /* UpdateNoteUseCase.swift */; };
+		340F737A2B5D6E2D004AFACC /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340F73792B5D6E2D004AFACC /* Mocks.swift */; };
 		346EB78E2B1E3E6500590F0E /* Note_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EB78D2B1E3E6500590F0E /* Note_Tests.swift */; };
 		346EB7952B1E44F500590F0E /* ViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346EB7942B1E44F500590F0E /* ViewModel_Tests.swift */; };
 		349E01982B2B7C9F00D0E516 /* RemoveNoteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349E01972B2B7C9F00D0E516 /* RemoveNoteUseCase.swift */; };
@@ -46,6 +47,7 @@
 		3409D2BF2B1CD16F0066A373 /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
 		3409D2C32B1CD9B00066A373 /* UpdateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteView.swift; sourceTree = "<group>"; };
 		340F73762B5D687C004AFACC /* UpdateNoteUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateNoteUseCase.swift; sourceTree = "<group>"; };
+		340F73792B5D6E2D004AFACC /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		346EB78B2B1E3E6500590F0E /* TestingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		346EB78D2B1E3E6500590F0E /* Note_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note_Tests.swift; sourceTree = "<group>"; };
 		346EB7942B1E44F500590F0E /* ViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel_Tests.swift; sourceTree = "<group>"; };
@@ -149,12 +151,21 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		340F73782B5D6E1D004AFACC /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				340F73792B5D6E2D004AFACC /* Mocks.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		346EB78C2B1E3E6500590F0E /* TestingTests */ = {
 			isa = PBXGroup;
 			children = (
 				346EB78D2B1E3E6500590F0E /* Note_Tests.swift */,
 				346EB7942B1E44F500590F0E /* ViewModel_Tests.swift */,
 				34D3F7FD2B2A275300CFDD0F /* ViewModel_Integration_Tests.swift */,
+				340F73782B5D6E1D004AFACC /* Mocks */,
 			);
 			path = TestingTests;
 			sourceTree = "<group>";
@@ -299,6 +310,7 @@
 				346EB7952B1E44F500590F0E /* ViewModel_Tests.swift in Sources */,
 				34D3F7FE2B2A275300CFDD0F /* ViewModel_Integration_Tests.swift in Sources */,
 				346EB78E2B1E3E6500590F0E /* Note_Tests.swift in Sources */,
+				340F737A2B5D6E2D004AFACC /* Mocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

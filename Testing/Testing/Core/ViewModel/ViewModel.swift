@@ -12,6 +12,9 @@ import Observation
 class ViewModel {
     var notes: [Note]
     
+    // to store errors from UseCases or Database
+    var databaseError: DatabaseError?
+    
     // dependency injection
     var createNoteUseCase: CreateNoteProtocol
     var fetchAllNotesUseCase: FetchAllNotesProtocol
@@ -46,6 +49,9 @@ class ViewModel {
         do {
             try removeNoteUseCase.removeNoteWith(identifier: identifier)
             fetchAllNotes()
+        } catch let error as DatabaseError {
+            debugPrint("Error \(error.localizedDescription)")
+            databaseError = error
         } catch {
             debugPrint("Error \(error.localizedDescription)")
         }

@@ -101,6 +101,17 @@ final class ViewModel_Integration_Tests: XCTestCase {
         
     }
     
+    // try to remove a note that doesn't exist
+    func test_removeNoteInDatabaseShouldThrowError() {
+        // When
+        sut.removeNoteWith(identifier: UUID())
+        
+        // Then
+        XCTAssertEqual(sut.notes.count, 0)
+        XCTAssertNotNil(sut.databaseError)
+        XCTAssertEqual(sut.databaseError, DatabaseError.errorRemove)
+    }
+    
     func test_updateNote() {
         // Given
         sut.createNoteWith(title: "Note 1", text: "text 1")

@@ -11,15 +11,15 @@ import SwiftData
 enum DatabaseError: Error {
     case errorInsert
     case errorFetch
-    case errorUpdate
     case errorRemove
+    case errorUpdate
 }
 
 protocol NotesDatabaseProtocol {
     func insert(note: Note) throws
     func fetchAll() throws -> [Note]
-    func update(identifier: UUID, title: String, text: String?) throws
     func remove(identifier: UUID) throws
+    func update(identifier: UUID, title: String, text: String?) throws
 }
 
 class NotesDatabase: NotesDatabaseProtocol {
@@ -71,6 +71,33 @@ class NotesDatabase: NotesDatabaseProtocol {
         }
     }
     
+    // remove stored note
+    @MainActor
+    func remove(identifier: UUID) throws {
+        
+        // the criteria used to find the note to remove
+        let notePredicate = #Predicate<Note> {
+            $0.identifier == identifier
+        }
+        
+        // use the criteria defined to fetch the note to remove
+        var fetchDescriptor = FetchDescriptor<Note>(predicate: notePredicate)
+        fetchDescriptor.fetchLimit = 1
+        
+        do {
+            guard let deleteNote = try container.mainContext.fetch(fetchDescriptor).first else {
+                throw DatabaseError.errorRemove
+            }
+            
+            container.mainContext.delete(deleteNote)
+            try container.mainContext.save()
+            
+        } catch {
+            debugPrint("Error updating info")
+            throw DatabaseError.errorRemove
+        }
+    }
+    
     // update stored note
     @MainActor
     func update(identifier: UUID, title: String, text: String?) throws {
@@ -97,33 +124,5 @@ class NotesDatabase: NotesDatabaseProtocol {
             debugPrint("Error updating info")
             throw DatabaseError.errorUpdate
         }
-    }
-    
-    // remove stored note
-    @MainActor
-    func remove(identifier: UUID) throws {
-        
-        // the criteria used to find the note to remove
-        let notePredicate = #Predicate<Note> {
-            $0.identifier == identifier
-        }
-        
-        // use the criteria defined to fetch the note to remove
-        var fetchDescriptor = FetchDescriptor<Note>(predicate: notePredicate)
-        fetchDescriptor.fetchLimit = 1
-        
-        do {
-            guard let deleteNote = try container.mainContext.fetch(fetchDescriptor).first else {
-                throw DatabaseError.errorRemove
-            }
-            
-            container.mainContext.delete(deleteNote)
-            try container.mainContext.save()
-            
-        } catch {
-            debugPrint("Error updating info")
-            throw DatabaseError.errorUpdate
-        }
-        
     }
 }

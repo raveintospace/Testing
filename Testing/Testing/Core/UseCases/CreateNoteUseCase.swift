@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct CreateNoteUseCase {
+protocol CreateNoteProtocol {
+    func createNoteWith(title: String, text: String) throws
+}
+
+struct CreateNoteUseCase: CreateNoteProtocol {
     var notesDatabase: NotesDatabaseProtocol
     
     init(notesDatabase: NotesDatabaseProtocol = NotesDatabase.shared) {

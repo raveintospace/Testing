@@ -8,6 +8,22 @@
 import XCTest
 @testable import Testing
 
+// simulates database storage
+var mockDatabase: [Note] = []
+
+struct createNoteUseCaseMock: CreateNoteProtocol {
+    func createNoteWith(title: String, text: String) throws {
+        let note = Note(title: title, text: text, createdAt: .now)
+        mockDatabase.append(note)
+    }
+}
+
+struct fetchAllNotesUseCaseMock: FetchAllNotesProtocol {
+    func fetchAll() throws -> [Testing.Note] {
+        return mockDatabase
+    }
+}
+
 final class ViewModel_Tests: XCTestCase {
     var sut: ViewModel!
 

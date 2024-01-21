@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct RemoveNoteUseCase {
+protocol RemoveNoteProtocol {
+    func removeNote(note: Note) throws
+}
+
+struct RemoveNoteUseCase: RemoveNoteProtocol {
     var notesDatabase: NotesDatabaseProtocol
     
     init(notesDatabase: NotesDatabaseProtocol = NotesDatabase.shared) {

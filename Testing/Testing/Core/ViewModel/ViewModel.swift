@@ -13,14 +13,14 @@ class ViewModel {
     var notes: [Note]
     
     // dependency injection
-    var createNoteUseCase: CreateNoteUseCase
-    var fetchAllNotesUseCase: FetchAllNotesUseCase
-    var removeNoteUseCase: RemoveNoteUseCase
+    var createNoteUseCase: CreateNoteProtocol
+    var fetchAllNotesUseCase: FetchAllNotesProtocol
+    var removeNoteUseCase: RemoveNoteProtocol
     
     init(notes: [Note] = [],
-         createNoteUseCase: CreateNoteUseCase = CreateNoteUseCase(),
-         fetchAllNotesUseCase: FetchAllNotesUseCase = FetchAllNotesUseCase(),
-         removeNoteUseCase: RemoveNoteUseCase = RemoveNoteUseCase()) {
+         createNoteUseCase: CreateNoteProtocol = CreateNoteUseCase(),
+         fetchAllNotesUseCase: FetchAllNotesProtocol = FetchAllNotesUseCase(),
+         removeNoteUseCase: RemoveNoteProtocol = RemoveNoteUseCase()) {
         
         self.notes = notes
         self.createNoteUseCase = createNoteUseCase

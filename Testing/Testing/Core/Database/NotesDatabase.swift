@@ -18,7 +18,8 @@ enum DatabaseError: Error {
 protocol NotesDatabaseProtocol {
     func insert(note: Note) throws
     func fetchAll() throws -> [Note]
-    func remove(note: Note) throws
+    func update(identifier: UUID, title: String, text: String?) throws
+    func remove(identifier: UUID) throws
 }
 
 class NotesDatabase: NotesDatabaseProtocol {
@@ -70,28 +71,59 @@ class NotesDatabase: NotesDatabaseProtocol {
         }
     }
     
-    // update stored note - https://www.delasign.com/blog/xcode-swiftdata-update/
+    // update stored note
     @MainActor
-    func update() throws {
+    func update(identifier: UUID, title: String, text: String?) throws {
+        
+        // the criteria used to find the note to update
+        let notePredicate = #Predicate<Note> {
+            $0.identifier == identifier
+        }
+        
+        // use the criteria defined to fetch the note to update
+        var fetchDescriptor = FetchDescriptor<Note>(predicate: notePredicate)
+        fetchDescriptor.fetchLimit = 1
         
         do {
+            guard let updateNote = try container.mainContext.fetch(fetchDescriptor).first else {
+                throw DatabaseError.errorUpdate
+            }
+            
+            updateNote.title = title
+            updateNote.text = text
             try container.mainContext.save()
+            
         } catch {
-            debugPrint("Error \(error.localizedDescription)")
+            debugPrint("Error updating info")
             throw DatabaseError.errorUpdate
         }
     }
     
     // remove stored note
     @MainActor
-    func remove(note: Note) throws {
-        container.mainContext.delete(note)
+    func remove(identifier: UUID) throws {
+        
+        // the criteria used to find the note to remove
+        let notePredicate = #Predicate<Note> {
+            $0.identifier == identifier
+        }
+        
+        // use the criteria defined to fetch the note to remove
+        var fetchDescriptor = FetchDescriptor<Note>(predicate: notePredicate)
+        fetchDescriptor.fetchLimit = 1
         
         do {
+            guard let deleteNote = try container.mainContext.fetch(fetchDescriptor).first else {
+                throw DatabaseError.errorRemove
+            }
+            
+            container.mainContext.delete(deleteNote)
             try container.mainContext.save()
+            
         } catch {
-            debugPrint("Error \(error.localizedDescription)")
-            throw DatabaseError.errorRemove
+            debugPrint("Error updating info")
+            throw DatabaseError.errorUpdate
         }
+        
     }
 }

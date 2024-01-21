@@ -18,9 +18,13 @@ final class ViewModel_Integration_Tests: XCTestCase {
         
         let createNoteUseCase = CreateNoteUseCase(notesDatabase: database)
         let fetchAllNotesUseCase = FetchAllNotesUseCase(notesDatabase: database)
+        let removeNoteUseCase = RemoveNoteUseCase(notesDatabase: database)
+        let updateNoteUseCase = UpdateNoteUseCase(notesDatabase: database)
         
         sut = ViewModel(createNoteUseCase: createNoteUseCase,
-                        fetchAllNotesUseCase: fetchAllNotesUseCase)
+                        fetchAllNotesUseCase: fetchAllNotesUseCase,
+                        removeNoteUseCase: removeNoteUseCase,
+                        updateNoteUseCase: updateNoteUseCase)
     }
 
     override func tearDownWithError() throws {
@@ -77,5 +81,42 @@ final class ViewModel_Integration_Tests: XCTestCase {
         XCTAssertEqual(secondNote.title, "Hello 2", "Second note's title should be 'Hello 2'")
         XCTAssertEqual(secondNote.text, "text 2", "Second note's text should be 'text 2'")
     }
-
+    
+    func test_removeNote() {
+        // Given
+        sut.createNoteWith(title: "Note 1", text: "text 1")
+        sut.createNoteWith(title: "Note 2", text: "text 2")
+        sut.createNoteWith(title: "Note 3", text: "text 3")
+        
+        guard let note = sut.notes.last else {
+            XCTFail()
+            return
+        }
+        
+        // When
+        sut.removeNoteWith(identifier: note.identifier)
+        
+        // Then
+        XCTAssertEqual(sut.notes.count, 2, "There should be two notes in database")
+        
+    }
+    
+    func test_updateNote() {
+        // Given
+        sut.createNoteWith(title: "Note 1", text: "text 1")
+        
+        guard let note = sut.notes.first else {
+            XCTFail()
+            return
+        }
+        
+        // When
+        sut.updateNoteWith(identifier: note.identifier, newTitle: "New title", newText: "New text")
+        sut.fetchAllNotes()
+        
+        // Then
+        XCTAssertEqual(sut.notes.count, 1, "There should be one note in database")
+        XCTAssertEqual(note.title, "New title")
+        XCTAssertEqual(note.text, "New text")
+    }
 }

@@ -44,7 +44,7 @@ class ViewModel {
     
     func removeNoteWith(identifier: UUID) {
         do {
-            try removeNoteUseCase.removeNote(identifier: identifier)
+            try removeNoteUseCase.removeNoteWith(identifier: identifier)
             fetchAllNotes()
         } catch {
             debugPrint("Error \(error.localizedDescription)")

@@ -24,6 +24,14 @@ struct fetchAllNotesUseCaseMock: FetchAllNotesProtocol {
     }
 }
 
+struct removeNoteUseCaseMock: RemoveNoteProtocol {
+    func removeNoteWith(identifier: UUID) throws {
+        if let index = mockDatabase.firstIndex(where: { $0.identifier == identifier }) {
+            mockDatabase.remove(at: index)
+        }
+    }
+}
+
 struct updateNoteUseCaseMock: UpdateNoteProtocol {
     func updateNoteWith(identifier: UUID, title: String, text: String?) throws {
         if let index = mockDatabase.firstIndex(where: { $0.identifier == identifier }) {

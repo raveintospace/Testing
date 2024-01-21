@@ -14,6 +14,7 @@ final class ViewModel_Tests: XCTestCase {
     override func setUpWithError() throws {
         sut = ViewModel(createNoteUseCase: createNoteUseCaseMock(),
                         fetchAllNotesUseCase: fetchAllNotesUseCaseMock(),
+                        removeNoteUseCase: removeNoteUseCaseMock(),
                         updateNoteUseCase: updateNoteUseCaseMock())
     }
 
@@ -83,23 +84,23 @@ final class ViewModel_Tests: XCTestCase {
             XCTFail("No note to update")
         }
     }
-//    
-//    func test_ViewModel_removeNoteWith_removesNote() {
-//        // Given
-//        let title = "Test title"
-//        let text = "Test text"
-//        sut.createNoteWith(title: title, text: text)
-//        
-//        if let identifier = sut.notes.first?.identifier {
-//            
-//        // When
-//            sut.removeNoteWith(identifier: identifier)
-//        
-//        // Then
-//            XCTAssertTrue(sut.notes.isEmpty)
-//        } else {
-//            XCTFail("No note to remove")
-//        }
-//    }
+    
+    func test_ViewModel_removeNoteWith_removesNote() {
+        // Given
+        let title = "Test title"
+        let text = "Test text"
+        sut.createNoteWith(title: title, text: text)
+        
+        if let identifier = sut.notes.first?.identifier {
+            
+        // When
+            sut.removeNoteWith(identifier: identifier)
+        
+        // Then
+            XCTAssertTrue(sut.notes.isEmpty)
+        } else {
+            XCTFail("No note to remove")
+        }
+    }
 
 }

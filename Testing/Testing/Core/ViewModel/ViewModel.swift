@@ -16,16 +16,19 @@ class ViewModel {
     var createNoteUseCase: CreateNoteProtocol
     var fetchAllNotesUseCase: FetchAllNotesProtocol
     var removeNoteUseCase: RemoveNoteProtocol
+    var updateNoteUseCase: UpdateNoteProtocol
     
     init(notes: [Note] = [],
          createNoteUseCase: CreateNoteProtocol = CreateNoteUseCase(),
          fetchAllNotesUseCase: FetchAllNotesProtocol = FetchAllNotesUseCase(),
-         removeNoteUseCase: RemoveNoteProtocol = RemoveNoteUseCase()) {
+         removeNoteUseCase: RemoveNoteProtocol = RemoveNoteUseCase(),
+         updateNoteUseCase: UpdateNoteProtocol = UpdateNoteUseCase()) {
         
         self.notes = notes
         self.createNoteUseCase = createNoteUseCase
         self.fetchAllNotesUseCase = fetchAllNotesUseCase
         self.removeNoteUseCase = removeNoteUseCase
+        self.updateNoteUseCase = updateNoteUseCase
         
         fetchAllNotes()
     }
@@ -39,32 +42,27 @@ class ViewModel {
         }
     }
     
-    func fetchAllNotes() {
+    func removeNoteWith(identifier: UUID) {
         do {
-            notes = try fetchAllNotesUseCase.fetchAll()
+            try removeNoteUseCase.removeNote(identifier: identifier)
         } catch {
             debugPrint("Error \(error.localizedDescription)")
         }
     }
     
     func updateNoteWith(identifier: UUID, newTitle: String, newText: String?) {
-        if let index = notes.firstIndex(where: { $0.identifier == identifier }) {
-            let updatedNote = Note(identifier: identifier, title: newTitle, text: newText, createdAt: notes[index].createdAt)
-            notes[index] = updatedNote
+        do {
+            try updateNoteUseCase.updateNoteWith(identifier: identifier, title: newTitle, text: newText)
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
         }
     }
     
-    func removeNoteWith(identifier: UUID) {
-        //notes.removeAll(where: { $0.identifier == identifier })
-        
-        if let index = notes.firstIndex(where: { $0.identifier == identifier }) {
-            let noteToRemove = Note(identifier: identifier, title: notes[index].title, text: notes[index].text, createdAt: notes[index].createdAt)
-            do {
-                try removeNoteUseCase.removeNote(note: noteToRemove)
-                fetchAllNotes()
-            } catch {
-                debugPrint("Error \(error.localizedDescription)")
-            }
+    func fetchAllNotes() {
+        do {
+            notes = try fetchAllNotesUseCase.fetchAll()
+        } catch {
+            debugPrint("Error \(error.localizedDescription)")
         }
     }
 }

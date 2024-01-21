@@ -8,7 +8,7 @@
 import Foundation
 
 protocol RemoveNoteProtocol {
-    func removeNote(note: Note) throws
+    func removeNote(identifier: UUID) throws
 }
 
 struct RemoveNoteUseCase: RemoveNoteProtocol {
@@ -19,7 +19,7 @@ struct RemoveNoteUseCase: RemoveNoteProtocol {
     }
     
     // remove a note and send it to NotesDatabase
-    func removeNote(note: Note) throws {
-        try notesDatabase.remove(note: note)
+    func removeNote(identifier: UUID) throws {
+        try notesDatabase.remove(identifier: identifier)
     }
 }

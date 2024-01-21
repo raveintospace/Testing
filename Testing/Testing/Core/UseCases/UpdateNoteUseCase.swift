@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UpdateNoteProtocol {
-    func updateNoteWith(identifier: UUID, title: String, text: String?) throw
+    func updateNoteWith(identifier: UUID, title: String, text: String?) throws
 }
 
 struct UpdateNoteUseCase: UpdateNoteProtocol {

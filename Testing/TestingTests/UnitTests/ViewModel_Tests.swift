@@ -19,7 +19,7 @@ final class ViewModel_Tests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // reset mockDatabase for every test
+        // reset mockDatabase in Mocks for every test
         mockDatabase = []
     }
 

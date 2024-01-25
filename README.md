@@ -12,3 +12,4 @@ ToDo app using SwiftUI, SwiftData & implementing tests, following SwiftBeta tuto
 <li>UseCases responsible of logic, extracted from ViewModel</li>
 <li>UseCases that use Singletons</li>
 <li>ViewModel with dependency injection</li>
+<li>Protocols & Mocks for Unit Tests</li>

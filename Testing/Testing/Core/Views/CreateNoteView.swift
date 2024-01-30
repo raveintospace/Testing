@@ -45,8 +45,10 @@ extension CreateNoteView {
             Section {
                 TextField("", text: $title, prompt: Text("*Title"), axis: .vertical)
                     .autocorrectionDisabled()
+                    .accessibilityIdentifier("createnote_title_identifier")
                 TextField("", text: $text, prompt: Text("Text"), axis: .vertical)
                     .autocorrectionDisabled()
+                    .accessibilityIdentifier("createnote_text_identifier")
             } footer: {
                 Text("*Title is compulsory")
             }
